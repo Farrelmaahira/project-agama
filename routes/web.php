@@ -27,7 +27,7 @@ Route::controller(HomeController::class)->group(function(){
 
 });
 
-//ROUTE CONTENT 
+//ROUTE CONTENT
 Route::controller(ContentController::class)->group(function(){
 
 });
