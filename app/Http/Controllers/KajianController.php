@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kajian;
 use Illuminate\Http\Request;
 
-class AuthController extends Controller
+class KajianController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.auth.login');
+        $data = Kajian::all();
+        return view('admin.kajian.kajian', ["data"=>$data]);
     }
 
     /**

@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('user.welcome');
 });
 
 //ROUTE HOMEPAGE
@@ -40,5 +40,12 @@ Route::controller(AdminController::class)->group(function(){
 
 //ROUTE AUTH
 Route::controller(AuthController::class)->group(function(){
+    Route::get('/admin/login', 'index')->name("admin.login");
+});
 
+//ROUTE KAJIAN
+
+//ADD MIDDLEWARE HERE
+Route::controller(\App\Http\Controllers\KajianController::class)->group(function (){
+    Route::get('/admin/kajian', 'index')->name('admin.kajian');
 });
