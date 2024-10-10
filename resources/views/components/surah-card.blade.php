@@ -7,19 +7,19 @@
             </div>
             <div class="text-left">
                 <h1 class="font-bold">
-                    {{$data['name']['transliteration']['id']}}
+                    {{$data['nama']}}
                 </h1>
                 <p>
-                    {{$data['name']['translation']['id']}}
+                    {{$data['arti']}}
                   </p>
             </div>
         </div>
         <div class="flex-wrap ">
             <h1 class="font-bold">
-                {{$data['name']['short']}}
+                {{$data['asma']}}
             </h1>
             <p>
-                {{$data['numberOfVerses']}} Ayat
+                {{$data['ayat']}} Ayat
             </p>
         </div>
     </div>

@@ -20,13 +20,13 @@ class HomeController extends Controller
         $res = Cache::remember('list-surah', now()->addMinutes(150), function(){
            return Http::get($this->urlAPI . '/data.json?print=pretty')->json();
         });
-
+        dd($res);
         return view('user.welcome', ['data' => $res]);
     }
 
     public function show($id)
     {
-    
+
     }
 
 
