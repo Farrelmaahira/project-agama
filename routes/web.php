@@ -22,13 +22,8 @@ use Illuminate\Support\Facades\Route;
 //ROUTE HOMEPAGE
 Route::controller(HomeController::class)->group(function(){
     Route::get('/', 'index');
+    Route::get('/surah/{id}', 'show');
 });
-
-//ROUTE CONTENT 
-Route::controller(ContentController::class)->group(function(){
-
-});
-
 
 //ROUTE ADMIN
 Route::controller(AdminController::class)->group(function(){
