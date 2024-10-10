@@ -14,14 +14,14 @@ class HomeController extends Controller
     {
         if(Cache::has('list-surah')) {
             $data = Cache::get('list-surah');
-            return view('welcome', data: ['data' => $data]);
+            return view('user.welcome', data: ['data' => $data]);
         }
 
         $res = Cache::remember('list-surah', now()->addMinutes(150), function(){
            return Http::get($this->urlAPI . '/data.json?print=pretty')->json();
         });
 
-        return view('welcome', data: ['data' => $res]);
+        return view('user.welcome', ['data' => $res]);
     }
 
     public function show($id)
