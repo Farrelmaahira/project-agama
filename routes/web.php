@@ -25,7 +25,7 @@ Route::get('/', function () {
 //ROUTE HOMEPAGE
 Route::controller(HomeController::class)->group(function(){
     Route::get('/', 'index');
-    Route::get('/surah/{id}', 'show');
+    Route::get('/surah/{id}/{slug}', 'show')->name('surah.show');
 });
 
 //ROUTE ADMIN
