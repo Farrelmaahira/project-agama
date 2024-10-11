@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 use PhpParser\Node\Stmt\TryCatch;
 
 class HomeController extends Controller
@@ -13,20 +14,20 @@ class HomeController extends Controller
 
     private function slugMaker($string)
     {
-        // Convert string to lowercase 
+        // Convert string to lowercase
         $str = strtolower($string);
 
-        // Replace the spaces with hyphens 
+        // Replace the spaces with hyphens
         $str = str_replace(' ', '-', $str);
 
-        // Remove the special characters 
+        // Remove the special characters
         $str = preg_replace('/[^a-z0-9\-]/', '', $str);
 
-        // Remove the consecutive hyphens 
+        // Remove the consecutive hyphens
         $str = preg_replace('/-+/', '-', $str);
 
-        // Trim hyphens from the beginning 
-        // and ending of String 
+        // Trim hyphens from the beginning
+        // and ending of String
         $str = trim($str, '-');
 
         return $str;
@@ -59,18 +60,27 @@ class HomeController extends Controller
         try {
             if (Cache::has('surah-' . $id)) {
                 $data = Cache::get('surah-' . $id);
-                dd($data);
-                return view('user.surah.detail', data: ['data' => $data]);
+                return view('user.surah.detail', ['data' => $data]);
             }
 
             $res = Cache::remember('surah-' . $id, now()->addMinutes(150), function () use ($id) {
-                $data = Http::get($this->urlAPI . '/surat/' . $id . '.json?print=preety')->json();
-                return $data;
+                return Http::get($this->urlAPI . '/surat/' . $id . '.json?print=pretty')->json();
             });
-            return view('user.surah.detail', data: ['data' => $res]);
+
+            $newData = collect($res)->map(function ($item) {
+                if (Str::contains($item['ar'], 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ')) {
+                    $item['bismillah'] = 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ';
+                    $item['ar'] = str_replace('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', '', $item['ar']);
+                } else {
+                    $item['bismillah'] = null;
+                }
+                return $item;
+            });
+
+            return view('user.surah.detail', ['data' => $newData]);
         } catch (\Throwable $e) {
-            dd($e);
-            return view('user.surah.detail')->with('error', $e);
+            return view('user.surah.detail')->with('error', $e->getMessage());
         }
     }
+
 }
