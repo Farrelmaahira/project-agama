@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\HomeController;
+use App\Http\Middleware\NotAuthenticate;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Support\Facades\Route;
 
@@ -35,12 +36,13 @@ Route::controller(AdminController::class)->group(function(){
 
 //ROUTE AUTH
 Route::controller(AuthController::class)->group(function(){
-    Route::get('/admin/login', 'index')->name("admin.login");
+    Route::get('/admin/login', 'index')->name("admin.login")->middleware(NotAuthenticate::class);
+    Route::post('/auth/login', 'signIn')->name("admin.signin");
 });
 
 //ROUTE KAJIAN
 
 //ADD MIDDLEWARE HERE
 Route::controller(\App\Http\Controllers\KajianController::class)->group(function (){
-    Route::get('/admin/kajian', 'index')->name('admin.kajian');
+    Route::get('/admin/kajian', 'index')->name('dashboard')->middleware('auth');
 });

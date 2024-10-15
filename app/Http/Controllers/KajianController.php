@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kajian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KajianController extends Controller
 {
@@ -12,6 +13,9 @@ class KajianController extends Controller
      */
     public function index()
     {
+        //BUAT DAPETIN DATA YANG LAGI LOGIN BISA KYK DIBAWAH 
+        // $user = Auth::user();
+        
         $data = Kajian::all();
         return view('admin.kajian.kajian', ["data"=>$data]);
     }
