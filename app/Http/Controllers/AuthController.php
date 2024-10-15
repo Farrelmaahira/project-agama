@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -17,9 +18,20 @@ class AuthController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function signIn(Request $req) 
     {
-        //
+        $credentials = $req->validate([
+            'username' => 'required|string',
+            'password' => 'required|string|min:8'
+        ]);
+
+        if(Auth::attempt($credentials)) {
+            return redirect()->intended('/admin/kajian');
+        }
+
+        return back()->withErrors([
+            'error' => 'The credential not match with our record'
+        ])->onlyInput('username');
     }
 
     /**
