@@ -7,7 +7,17 @@ export default {
     ],
     theme: {
         extend: {
-            scrollBehavior: ['smooth']
+            scrollBehavior: ['smooth'],
+            fontFamily: {
+                poppins: ["Poppins", "sans-serif"],
+            },
+            colors:{
+                primary: "#2E073F",
+                secondary: "#C8A1E0",
+                tertiary: "#E2BFD9",
+                font: "#F7EFE5",
+                base: "#FFF"
+            }
         },
     },
     plugins: [require("daisyui")],
