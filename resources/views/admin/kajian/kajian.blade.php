@@ -39,7 +39,9 @@
                         </td>
                     </tr>
                 @empty
-                    kosong
+                    <tr class="text-center">
+                        <th colspan="7">Kosong</th>
+                    </tr>
                 @endforelse
 
                 </tbody>
