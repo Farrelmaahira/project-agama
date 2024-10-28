@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kajian;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class KajianController extends Controller
@@ -13,11 +14,12 @@ class KajianController extends Controller
      */
     public function index()
     {
-        //BUAT DAPETIN DATA YANG LAGI LOGIN BISA KYK DIBAWAH 
-        // $user = Auth::user();
-        
-        $data = Kajian::all();
-        return view('admin.kajian.kajian', ["data"=>$data]);
+        try {
+            $data = Kajian::all();
+            return view('admin.kajian.kajian', ["data" => $data]);
+        } catch (\Throwable $e) {
+            return view('admin.kajian.kajian')->with('error', $e);
+        }
     }
 
     /**
@@ -25,7 +27,7 @@ class KajianController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.kajian.add-kajian');
     }
 
     /**
@@ -33,7 +35,37 @@ class KajianController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+
+            $request->validate([
+                'judul' => ['required'],
+                'tanggal' => ['required'],
+                'jam' => ['required', 'date_format:H:i'],
+                'description' => ['required'],
+            ]);
+
+            $time = Carbon::createFromFormat('H:i', $request->jam);
+
+            $data = [
+                'judul' => $request->judul,
+                'tanggal' => $request->tanggal,
+                'jam' => $time,
+                'description' => $request->description
+            ];
+
+            if ($request->hasFile('foto')) {
+                $path = $request->file('foto')->store('uploads');
+                $data['foto'] = $path;
+            }
+
+            $res = Kajian::create($data);
+            dd($res);
+            return view('admin.kajian.kajian');
+
+        } catch (\Throwable $e) {
+            dd($e);
+            return view('admin.kajian.add-kajian')->with('error', $e);
+        }
     }
 
     /**
@@ -41,7 +73,10 @@ class KajianController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+        } catch (\Throwable $th) {
+            return view();
+        }
     }
 
     /**
