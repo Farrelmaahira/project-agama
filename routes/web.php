@@ -2,10 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ContentController;
 use App\Http\Controllers\HomeController;
-use App\Http\Middleware\NotAuthenticate;
-use Illuminate\Mail\Mailables\Content;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,14 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('user.welcome');
-});
 
 //ROUTE HOMEPAGE
 Route::controller(HomeController::class)->group(function(){
     Route::get('/', 'index');
-    Route::get('/surah/{id}/{slug}', 'show')->name('surah.show');
+    Route::get('/surah/{id}', 'show');
 });
 
 //ROUTE ADMIN
@@ -36,6 +30,7 @@ Route::controller(AdminController::class)->group(function(){
 
 //ROUTE AUTH
 Route::controller(AuthController::class)->group(function(){
+<<<<<<< HEAD
     Route::get('/admin/login', 'index')->name("admin.login")->middleware(NotAuthenticate::class);
     Route::post('/auth/login', 'signIn')->name("admin.signin");
 });
@@ -49,4 +44,9 @@ Route::controller(\App\Http\Controllers\KajianController::class)->group(function
 });
 Route::controller(\App\Http\Controllers\SunnahController::class)->group(function (){
     Route::get('/admin/sunnah', 'index')->name('admin.sunnah')->middleware('auth');
+=======
+    Route::get('/admin/signin', 'index');
+    Route::post('/admin/signin', 'signIn');
+    Route::get('/admin/signout', 'signOut');
+>>>>>>> d319bca2507e533875a82ab0afea40c2a965a180
 });
