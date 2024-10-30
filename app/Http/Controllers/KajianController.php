@@ -151,16 +151,16 @@ class KajianController extends Controller
     public function destroy(string $id)
     {
         try {
-           $data = Kajian::find($id); 
+            $data = Kajian::find($id);
 
-           if($data == null) {
-            return view('admin.kajian.kajian')->with('error', 'Data not found');
-           }
+            if($data == null) {
+                return view('admin.kajian.kajian')->with('error', 'Data not found');
+            }
 
-           $data->delete();
-           if($data) {
-            return view('admin.kajian.kajian');
-           }
+            $data->delete();
+            if($data) {
+                return view('admin.kajian.kajian');
+            }
 
         } catch (\Throwable $e) {
             dd($e);

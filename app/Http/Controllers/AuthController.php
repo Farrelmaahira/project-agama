@@ -18,7 +18,7 @@ class AuthController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function signIn(Request $req) 
+    public function signIn(Request $req)
     {
         $credentials = $req->validate([
             'username' => 'required|string',
@@ -26,7 +26,7 @@ class AuthController extends Controller
         ]);
 
         if(Auth::attempt($credentials)) {
-            return redirect()->intended('/admin/dashboard');
+            return redirect()->intended(route('admin.kajian'));
         }
 
         return back()->withErrors([
@@ -34,7 +34,7 @@ class AuthController extends Controller
         ])->onlyInput('username');
     }
 
-    public function signOut(Request $req) 
+    public function signOut(Request $req)
 
     {
         Auth::logout();
