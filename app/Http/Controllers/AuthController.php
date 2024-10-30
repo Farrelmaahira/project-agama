@@ -26,7 +26,7 @@ class AuthController extends Controller
         ]);
 
         if(Auth::attempt($credentials)) {
-            return redirect()->intended('/admin/kajian');
+            return redirect()->intended('/admin/dashboard');
         }
 
         return back()->withErrors([

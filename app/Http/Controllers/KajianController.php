@@ -18,7 +18,6 @@ class KajianController extends Controller
     {
         try {
             $data = Kajian::all();
-            dd($data);
             return view('admin.kajian.kajian', ["data" => $data]);
         } catch (\Throwable $e) {
             return view('admin.kajian.kajian')->with('error', $e);
@@ -131,7 +130,7 @@ class KajianController extends Controller
             }
 
             $data = Kajian::find($id);
-            
+
             if($data == null) {
                 return view('admin.kajian.kajian')->with('error', 'Record not found');
             }

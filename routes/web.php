@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KajianController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,17 +20,15 @@ use Illuminate\Support\Facades\Route;
 //ROUTE HOMEPAGE
 Route::controller(HomeController::class)->group(function(){
     Route::get('/', 'index');
-    Route::get('/surah/{id}', 'show');
+    Route::get('/surah/{id}', 'show')->name('surah.show');
 });
 
-//ROUTE ADMIN
-Route::controller(AdminController::class)->group(function(){
-
-});
-
+Route::controller(KajianController::class)->group(function(){
+    Route::get('/admin/dashboard', 'index');
+})->middleware('auth');
 //ROUTE AUTH
 Route::controller(AuthController::class)->group(function(){
-    Route::get('/admin/signin', 'index');
-    Route::post('/admin/signin', 'signIn');
-    Route::get('/admin/signout', 'signOut');
+    Route::get('/admin/signin', 'index')->middleware('alreadyAuthenticated');
+    Route::post('/admin/signin', 'signIn')->name('admin.signin');
+    Route::get('/admin/signout', 'signOut')->middleware('auth');
 });
