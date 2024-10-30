@@ -44,5 +44,9 @@ Route::controller(AuthController::class)->group(function(){
 
 //ADD MIDDLEWARE HERE
 Route::controller(\App\Http\Controllers\KajianController::class)->group(function (){
-    Route::get('/admin/kajian', 'index')->name('dashboard')->middleware('auth');
+    Route::get('/admin/kajian', 'index')->name('admin.kajian')->middleware('auth');
+    Route::get('/admin/kajian/add', 'create')->name('admin.kajian.add')->middleware('auth');
+});
+Route::controller(\App\Http\Controllers\SunnahController::class)->group(function (){
+    Route::get('/admin/sunnah', 'index')->name('admin.sunnah')->middleware('auth');
 });

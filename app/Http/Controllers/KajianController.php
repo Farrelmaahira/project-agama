@@ -13,9 +13,9 @@ class KajianController extends Controller
      */
     public function index()
     {
-        //BUAT DAPETIN DATA YANG LAGI LOGIN BISA KYK DIBAWAH 
+        //BUAT DAPETIN DATA YANG LAGI LOGIN BISA KYK DIBAWAH
         // $user = Auth::user();
-        
+
         $data = Kajian::all();
         return view('admin.kajian.kajian', ["data"=>$data]);
     }
@@ -25,7 +25,7 @@ class KajianController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.kajian.add-kajian');
     }
 
     /**

@@ -1,8 +1,8 @@
 <x-layouts.app>
-    <section class="h-[100vh] w-full relative" id="hero">
+    <section class="h-[100vh]  w-full relative" id="hero">
         <div class="absolute inset-0 w-full h-[100vh]">
             {{-- content tengah --}}
-            <div class="md:translate-y-24 translate-y-36 h-80 w-full grid md:grid-cols-2 grid-cols-1 gap-12">
+            <div class="md:translate-y-24 bg-base translate-y-36 h-80 w-full grid md:grid-cols-2 grid-cols-1 gap-12">
                 <div class="col-span-1 justify-center items-center md:grid hidden">
                     <img src="/images/ngaji.png" class="w-[24rem] h-[24rem] object-cover">
                 </div>
