@@ -27,6 +27,7 @@ Route::controller(HomeController::class)->group(function(){
 Route::controller(KajianController::class)->group(function(){
     Route::get('/admin/dashboard', 'index')->name('admin.kajian');
     Route::get('/admin/kajian/add', 'create')->name('admin.kajian.add');
+    Route::post('/admin/kajian/store', 'store')->name('admin.kajian.store');
     Route::get('/admin/sunnah');
 })->middleware('auth');
 

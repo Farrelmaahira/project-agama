@@ -38,7 +38,6 @@ class KajianController extends Controller
     public function store(Request $request)
     {
         try {
-
             $request->validate([
                 'judul' => ['required'],
                 'tanggal' => ['required'],
@@ -61,11 +60,9 @@ class KajianController extends Controller
             }
 
             $res = Kajian::create($data);
-            dd($res);
-            return view('admin.kajian.kajian');
+            return redirect()->route('admin.kajian');
 
         } catch (\Throwable $e) {
-            dd($e);
             return view('admin.kajian.add-kajian')->with('error', $e);
         }
 
