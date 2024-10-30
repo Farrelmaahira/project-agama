@@ -1,19 +1,11 @@
 <x-layouts.admin-layout>
     <div class="px-22 py-12 ">
         <div class="mx-22 my-12">
-            <table class="table table-zebra">
-                <!-- head -->
-                <thead>
-                <tr class="text-center">
-                    <th>No</th>
-                    <th>Judul</th>
-                    <th>Tanggal</th>
-                    <th>Jam</th>
-                    <th>Deskripsi</th>
-                    <th colspan="2">Action</th>
-                </tr>
-                </thead>
-                <tbody>
+                <div class="w-full grid grid-cols-8">
+                    <div class="col-span-1">
+
+                    </div>
+                </div>
                 <!-- foreach row -->
                 @forelse($data as $d)
                     <tr class="text-center">
@@ -43,9 +35,6 @@
                         <th colspan="7">Kosong</th>
                     </tr>
                 @endforelse
-
-                </tbody>
-            </table>
         </div>
     </div>
 </x-layouts.admin-layout>

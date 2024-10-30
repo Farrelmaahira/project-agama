@@ -14,29 +14,37 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @vite('resources/css/app.css')
 
 </head>
-<body  class="font-poppins">
+<body class="font-poppins">
 
-{{--    body      --}}
 <main>
     <div class="flex h-screen gap-4">
-        <div class="md:w-1/6 h-screen md:block hidden p-4">
-            <div class="my-6">
-                <h1 class="text-xl text-gray-800 text-center font-bold">
-                    Islam.pro
-                </h1>
-                <div class="mt">
-
-                </div>
-            </div>
+        <!-- Sidebar -->
+        <div class="md:w-1/6 h-screen md:block hidden shadow-gray-400 shadow-md">
+            <h1 class="text-xl text-gray-800 text-center font-bold mt-12">
+                Islam.pro
+            </h1>
+            <div class="my-14"></div>
+           <x-admin-nav-link :active="true">
+               <x-icon.college/>
+               Kajian
+           </x-admin-nav-link>
+            <x-admin-nav-link >
+               <x-icon.college/>
+               Sunnah
+           </x-admin-nav-link>
+            <x-admin-nav-link >
+               <x-icon.college/>
+               Settings
+           </x-admin-nav-link>
         </div>
-        <div class="md:w-5/6 w-full h-[100dvh] overflow-y-scroll bg-base">
+
+        <!-- Content Area -->
+        <div class="md:w-5/6 w-full h-screen overflow-y-scroll bg-base">
             {{ $slot }}
         </div>
     </div>
-
 </main>
 
 </body>
