@@ -35,7 +35,7 @@ Route::controller(SunnahController::class)->group(function(){
 });
 //ROUTE AUTH
 Route::controller(AuthController::class)->group(function(){
-    Route::get('/admin/signin', 'index')->middleware('alreadyAuthenticated');
+    Route::get('/admin/signin', 'index')->middleware('auth');
     Route::post('/admin/signin', 'signIn')->name('admin.signin');
     Route::get('/admin/signout', 'signOut')->middleware('auth');
 });
