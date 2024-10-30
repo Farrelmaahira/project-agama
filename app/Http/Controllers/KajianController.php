@@ -16,20 +16,12 @@ class KajianController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
-        //BUAT DAPETIN DATA YANG LAGI LOGIN BISA KYK DIBAWAH
-        // $user = Auth::user();
-
-        $data = Kajian::all();
-        return view('admin.kajian.kajian', ["data"=>$data]);
-=======
         try {
             $data = Kajian::all();
             return view('admin.kajian.kajian', ["data" => $data]);
         } catch (\Throwable $e) {
             return view('admin.kajian.kajian')->with('error', $e);
         }
->>>>>>> d319bca2507e533875a82ab0afea40c2a965a180
     }
 
     /**
