@@ -21,6 +21,36 @@
     @include('components.layouts.navigation')
     {{--    body      --}}
     <main>
+        @if(session('success') || session('error') || session('info'))
+            <div class="py-6">
+                <div class="max-w-12xl toast toast-end toast-top mx-auto sm:px-6 lg:px-8">
+                    @if(session('success'))
+                        <div class="alert-success alert">
+                            {{session('success')}}
+                        </div>
+                    @elseif (session('info'))
+                        <div class="alert-info alert">
+                            {{session('info')}}
+                        </div>
+                    @elseif (session('error'))
+                        <div class="alert-info alert">
+                            {{session('error')}}
+                        </div>
+                    @endif
+                    @if(count($errors->all()) > 0)
+                        <div class="alert alert-error">
+                            <ul>
+                                @foreach ($errors->all() as $e)
+                                    <li>
+                                        {{$e}}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        @endif
         {{ $slot }}
     </main>
 

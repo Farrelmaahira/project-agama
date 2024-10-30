@@ -28,7 +28,10 @@ Route::controller(KajianController::class)->group(function(){
     Route::get('/admin/dashboard', 'index')->name('admin.kajian');
     Route::get('/admin/kajian/add', 'create')->name('admin.kajian.add');
     Route::post('/admin/kajian/store', 'store')->name('admin.kajian.store');
-    Route::get('/admin/sunnah');
+    Route::get('admin/kajian/edit/{id}', 'edit')->name('admin.kajian.edit');
+    Route::put('admin/kajian/update/{id}', 'update')->name('admin.kajian.update');
+    Route::get('admin/kajian/delete/{id}', 'destroy')->name('admin.kajian.destroy');
+    Route::get('admin/kajian/show/{id}', 'show')->name('admin.kajian.show');
 })->middleware('auth');
 
 Route::controller(SunnahController::class)->group(function(){
