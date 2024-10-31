@@ -6,13 +6,13 @@
     </div>
     <div class="hidden md:block">
         <ul class="flex md:text-[18px] gap-1 text-sm font-normal bg-tertiary px-2 py-3 rounded-full ease-in-out">
-            <x-user-nav-link :active="request()->routeIs('surah')">
+            <x-user-nav-link :active="request()->routeIs('surah')" :link="route('surah')">
                 Baca Quran
             </x-user-nav-link>
-            <x-user-nav-link :active="false">
+            <x-user-nav-link :active="request()->routeIs('kajian')" :link="route('kajian')">
                 Kajian
             </x-user-nav-link>
-            <x-user-nav-link :active="false">
+            <x-user-nav-link :active="request()->routeIs('sunnah')" :link="route('sunnah')">
                 Sunnah
             </x-user-nav-link>
         </ul>
