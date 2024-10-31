@@ -63,7 +63,7 @@ class KajianController extends Controller
             return redirect()->route('admin.kajian');
 
         } catch (\Throwable $e) {
-            return view('admin.kajian.add-kajian')->with('error', $e);
+            return redirect()->route('admin.kajian.add')->with('error', $e);
         }
 
     }
@@ -76,10 +76,9 @@ class KajianController extends Controller
 
         try {
             $data = Kajian::find($id);
-            dd($data);
+            return view('admin.kajian.detail-kajian', compact('data'));
         } catch (\Throwable $e) {
-            dd($e);
-            return view();
+            return redirect()->route('admin.kajian')->with('error', $e);
         }
 
     }
@@ -91,10 +90,9 @@ class KajianController extends Controller
     {
         try {
             $data = Kajian::find($id);
-            dd($data);
+           return view('admin.kajian.update-kajian', compact('data'));
         } catch (\Throwable $e) {
-            dd($e);
-            return view();
+            return redirect()->intended(route('admin.kajian'));
         }
     }
 
@@ -104,7 +102,6 @@ class KajianController extends Controller
     public function update(Request $request, string $id)
     {
         try {
-
             $request->validate([
                 'judul' => ['required'],
                 'tanggal' => ['required'],
@@ -113,6 +110,7 @@ class KajianController extends Controller
             ]);
 
             $time = Carbon::createFromFormat('H:i', $request->jam);
+
             $payload = [
                 'judul' => $request->judul,
                 'tanggal' => $request->tanggal,
@@ -125,18 +123,17 @@ class KajianController extends Controller
                 $path = $request->file('foto')->store('uploads');
                 $payload['foto'] = $path;
             }
-
             $data = Kajian::find($id);
-
             if($data == null) {
-                return view('admin.kajian.kajian')->with('error', 'Record not found');
+                return redirect()->route('admin.kajian')->with('error', 'Record not found');
             }
             $data->update($payload);
 
-            return view('admin.kajian.kajian');
+            return redirect()->intended(route('admin.kajian'));
 
         } catch (\Throwable $e) {
             dd($e);
+            return redirect()->route('admin.kajian.update', ['id'=>$id])->with('error', $e);
         }
 
 
@@ -151,17 +148,16 @@ class KajianController extends Controller
             $data = Kajian::find($id);
 
             if($data == null) {
-                return view('admin.kajian.kajian')->with('error', 'Data not found');
+                return redirect()->route('admin.kajian')->with('error', 'Data not found');
             }
-
             $data->delete();
             if($data) {
-                return view('admin.kajian.kajian');
+                return redirect()->route('admin.kajian');
             }
 
         } catch (\Throwable $e) {
             dd($e);
-            return view('admin.kajian.kajian')->with('error', $e);
+            return redirect()->route('admin.kajian')->with('error', $e);
         }
     }
 }

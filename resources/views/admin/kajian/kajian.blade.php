@@ -18,50 +18,62 @@
                     </a>
                 </div>
                 <div class="w-full flex gap-1  text-center py-2 border-2 border-gray-200 bg-white rounded-md">
-                    <div class="md:w-1/6 md:block hidden">
+                    <div class="md:w-1/5 md:block hidden">
                         Image
                     </div>
-                    <div class="md:w-1/6 w-1/5 ">
+                    <div class="md:w-1/5 w-1/4 ">
                         Judul
                     </div>
-                    <div class="md:w-1/6 w-1/5">
+                    <div class="md:w-1/5 w-1/4">
                         Tanggal
                     </div>
-                    <div class="md:w-1/6 w-1/5">
+                    <div class="md:w-1/5 w-1/4">
                         Jam
                     </div>
-                    <div class="md:w-1/6 w-1/5">
-                        Deskripsi
-                    </div>
-                    <div class="md:w-1/6 w-1/5">
+                    <div class="md:w-1/5 w-1/4">
                         Action
                     </div>
                 </div>
                 <!-- foreach row -->
                 @forelse($data as $d)
-                    <div class="w-full flex gap-1 mt-2 bg-white  text-center py-2 border-2 border-gray-200 rounded-md items-center">
-                        <div class="w-1/6 md:flex hidden justify-center">
+                    <div class="w-full flex gap-1 mt-2 bg-white  text-center py-2 border-2 border-gray-200 rounded-md items-center cursor-pointer">
+                        <div class="w-1/5 md:flex hidden justify-center">
                             <img src="{{ asset('storage/' . $d->foto) }}" class="w-32 h-20 object-cover rounded-md">
                         </div>
-                        <div class="md:w-1/6 w-1/5 truncate">
+                        <div class="md:w-1/5 w-1/4 truncate">
                             {{$d->judul}}
                         </div>
-                        <div class="md:w-1/6 w-1/5">
+                        <div class="md:w-1/5 w-1/4">
                             {{$d->tanggal}}
                         </div>
-                        <div class="md:w-1/6 w-1/5">
+                        <div class="md:w-1/5 w-1/4">
                             {{$d->jam}}
                         </div>
-                        <div class="md:w-1/6 w-1/5 truncate">
-                            {{$d->description}}
-                        </div>
-                        <div class="md:w-1/6 w-1/5 justify-center grid items-center">
-                            <div class="dropdown dropdown-end">
+                        <div class="md:w-1/5 w-1/4 justify-center grid grid-cols-2 items-center">
+                            <a href="{{route('admin.kajian.show', ['id'=> $d->id])}}" class="btn hover:bg-tertiary col-span-1 max-w-min hover:text-primary cursor-pointer text-white bg-primary mx-auto">
+                                <x-icon.open-book/>
+                            </a>
+                            <div class="dropdown dropdown-end col-span-1 mx-auto">
                                 <div tabindex="0" role="button" class=" m-1"><x-icon.menu/></div>
-                                <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-44 p-2 shadow">
-                                    <li><a>Item 1</a></li>
-                                    <li><a>Item 2</a></li>
+                                <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-md z-[1] w-44 p-2 shadow">
+                                    <li><a href="{{route('admin.kajian.edit', ['id'=> $d->id])}}">edit data</a></li>
+                                    <li><button class="bg-transparent text-start border-none" onclick="my_modal_1.showModal()">hapus data</button></li>
                                 </ul>
+{{--                                delete alert modals--}}
+                                <dialog id="my_modal_1" class="modal">
+                                    <div class="modal-box">
+                                        <form method="dialog">
+                                            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                        </form>
+                                        <h3 class="text-lg font-bold">Alert!</h3>
+                                        <p class="py-4">Apakah anda yakin akan menghapus kajian ini?</p>
+                                        <div class="modal-action">
+                                            <a class="btn bg-primary text-white hover:text-primary hover:bg-tertiary" href="{{route('admin.kajian.destroy', ['id'=>$d->id])}}">
+                                                Hapus
+                                            </a>
+                                        </div>
+                                    </div>
+                                </dialog>
                             </div>
                         </div>
                     </div>
@@ -72,4 +84,5 @@
                 @endforelse
         </div>
     </div>
+
 </x-layouts.admin-layout>
