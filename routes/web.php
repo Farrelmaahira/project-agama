@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 //ROUTE HOMEPAGE
 Route::controller(HomeController::class)->group(function(){
-    Route::get('/', 'index');
+    Route::get('/', 'index')->name('surah');
     Route::get('/surah/{id}', 'show')->name('surah.show');
 });
 
