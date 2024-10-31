@@ -1,5 +1,5 @@
 @props(['data'])
-<a href={{ route('surah.show', ['id' => $data['nomor'], 'slug' => $data['slug']]) }}>
+<a href={{ route('surah.show', ['id' => $data['nomor']]) }}>
     <div class="border-2 border-primary rounded-md flex gap-2 h-20 w-full p-2 items-center hover:bg-primary hover:text-white ">
         <div class="md:flex-1 flex-auto flex gap-4 items-center">
             <div class="w-8 h-8 border-2 rounded-full text-white bg-primary hover:bg-inherit hover:text-inherit text-center align-middle">
