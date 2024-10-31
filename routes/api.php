@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Core;
 use App\Http\Controllers\KajianController;
+use App\Http\Controllers\SunnahController;
 use App\Models\Kajian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,5 +28,13 @@ Route::get('/admin/kajian/{id}', [KajianController::class, 'show']);
 Route::put('/admin/kajian/{id}', [KajianController::class, 'update']);
 Route::delete('/admin/kajian/{id}', [KajianController::class, 'destroy']);
 
+
+Route::controller(SunnahController::class)->group(function(){
+    Route::get('/admin/sunnah', 'index');
+    Route::post('/admin/sunnah', 'store');
+    Route::get('/admin/sunnah/{id}', 'show');
+    Route::put('/admin/sunnah/{id}', 'update');
+    Route::delete('/admin/sunnah/{id}', 'destroy');
+});
 
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sunnah;
 use Illuminate\Http\Request;
+use Throwable;
 
 class SunnahController extends Controller
 {
@@ -12,8 +13,12 @@ class SunnahController extends Controller
      */
     public function index()
     {
-        $data = Sunnah::all();
-        return view('admin.sunnah.sunnah', compact('data'));
+        try {
+            $data = Sunnah::all();
+            return view('admin.sunnah.sunnah', compact('data'));
+        } catch (\Throwable $th) {
+            
+        }
     }
 
     /**
@@ -29,15 +34,47 @@ class SunnahController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $request->validate([
+                'judul' => ['required'],
+                'description' => ['required'],
+                'foto' => ['file', 'mimes:jpg,png,gif,jpeg']
+            ]);
+
+            $payload = [
+                'judul' => $request->judul,
+                'description' => $request->description,
+            ];
+
+            if($request->has('foto') != null) {
+                $path = $request->file('foto')->store('uploads/sunnah');
+                $payload['foto'] = $path;
+            }
+
+            $data = Sunnah::create($payload);
+            if($data) {
+                return redirect()->intended('/admin/sunnah');
+            }
+
+        } catch (\Throwable $th) {
+
+        }
+
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        //
+        try {
+            $data = Sunnah::find($id);
+
+            if($data == null) {
+                return redirect()->intended('/admin/sunnah');
+            }
+
+            dd($data);
+        } catch(\Throwable $e) {
+            dd($e);
+        }
     }
 
     /**
@@ -45,7 +82,18 @@ class SunnahController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        try {
+            $data = Sunnah::find($id);
+
+            if($data == null) {
+                return redirect()->intended('/admin/sunnah');
+            }
+
+            dd($data);
+        } catch(\Throwable $e) {
+            dd($e);
+        }
+
     }
 
     /**
@@ -53,7 +101,35 @@ class SunnahController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $request->validate([
+                'judul' => ['required'],
+                'description' => ['required'],
+                'foto' => ['file', 'mimes:jpg,png,gif,jpeg']
+            ]);
+
+            $payload = [
+                'judul' => $request->judul,
+                'description' => $request->description,
+            ];
+
+            if($request->has('foto') != null) {
+                $path = $request->file('foto')->store('uploads/sunnah');
+                $payload['foto'] = $path;
+            }
+
+            $sunnah = Sunnah::find($id); 
+
+            if($sunnah == null) {
+                return redirect()->intended('/admin/sunnah')->with('error', 'Data not found');
+            }
+
+            $sunnah->update($payload);
+
+            dd($sunnah);
+        } catch (\Throwable $th) {
+            dd($th);
+        }
     }
 
     /**
@@ -61,6 +137,20 @@ class SunnahController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $data = Sunnah::find($id);
+            if($data == null) {
+                return redirect()->intended('/admin/sunnah')->with('error', 'Data not found');
+            }
+
+
+            $data->delete();
+            if($data) {
+                return redirect()->intended('/admin/sunnah');
+            }
+
+        } catch (\Throwable $th) {
+            dd($th);
+        }
     }
 }

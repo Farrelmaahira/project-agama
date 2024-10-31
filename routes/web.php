@@ -24,7 +24,7 @@ Route::controller(HomeController::class)->group(function(){
     Route::get('/surah/{id}', 'show')->name('surah.show');
 });
 
-Route::controller(KajianController::class)->group(function(){
+Route::controller(KajianController::class)->middleware('auth')->group(function(){
     Route::get('/admin/dashboard', 'index')->name('admin.kajian');
     Route::get('/admin/kajian/add', 'create')->name('admin.kajian.add');
     Route::post('/admin/kajian/store', 'store')->name('admin.kajian.store');
@@ -32,14 +32,15 @@ Route::controller(KajianController::class)->group(function(){
     Route::put('admin/kajian/update/{id}', 'update')->name('admin.kajian.update');
     Route::get('admin/kajian/delete/{id}', 'destroy')->name('admin.kajian.destroy');
     Route::get('admin/kajian/show/{id}', 'show')->name('admin.kajian.show');
-})->middleware('auth');
+});
 
 Route::controller(SunnahController::class)->group(function(){
     Route::get('/admin/sunnah', 'index')->name('admin.sunnah');
+    Route::post('/admin/sunnah/add', 'store')->name('admin.sunnah.add');
 });
 //ROUTE AUTH
 Route::controller(AuthController::class)->group(function(){
     Route::get('/admin/signin', 'index')->middleware('alreadyAuthenticated');
     Route::post('/admin/signin', 'signIn')->name('admin.signin');
-    Route::get('/admin/signout', 'signOut')->middleware('auth');
+    Route::get('/admin/signout', 'signOut')->name('admin.logout')->middleware('auth');
 });

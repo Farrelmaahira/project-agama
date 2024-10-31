@@ -35,7 +35,7 @@
             @forelse($data as $d)
                 <div class="w-full flex gap-1 mt-2 bg-white  text-center py-2 border-2 border-gray-200 rounded-md items-center">
                     <div class="w-1/6 md:flex hidden justify-center">
-                        <img src="{{$d->foto}}" class="w-32 h-20 object-cover rounded-md">
+                        <img src="{{asset('storage/' . $d->foto)}}" class="w-32 h-20 object-cover rounded-md">
                     </div>
                     <div class="md:w-1/6 w-1/5 truncate">
                         {{$d->judul}}
