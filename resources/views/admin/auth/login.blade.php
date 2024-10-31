@@ -28,9 +28,9 @@
                     <div class="label">
                         <span class="label-text">Input your password!</span>
                     </div>
-                    <input type="text" placeholder="Password" class="w-full py-2 px-1 max-w-5xl bg-white outline-none border-b-2 border-gray-400" name="password"/>
+                    <input type="password" placeholder="Password" class="w-full py-2 px-1 max-w-5xl bg-white outline-none border-b-2 border-gray-400" name="password"/>
                 </label>
-                <button class="btn bg-primary text-white hover:text-primary hover:bg-tertiary w-32  text-lg font-bold rounded-full w-full md:my-10 my-4" type="submit">
+                <button class="btn bg-primary text-white hover:text-primary hover:bg-tertiary w-32  text-lg font-bold rounded-full md:my-10 my-4" type="submit">
                     Login
                 </button>
             </form>

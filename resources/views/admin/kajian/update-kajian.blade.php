@@ -42,7 +42,7 @@
             </textarea>
         </label>
         <div class="col-span-2 items-end">
-            <button class="btn btn-primary max-w-24 " type="submit">
+            <button class="btn bg-primary font-normal text-white hover:bg-tertiary hover:text-primary max-w-24 " type="submit">
                 Submit
             </button>
         </div>
