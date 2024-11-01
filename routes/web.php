@@ -36,11 +36,22 @@ Route::controller(KajianController::class)->middleware('auth')->group(function()
 
 Route::controller(SunnahController::class)->group(function(){
     Route::get('/admin/sunnah', 'index')->name('admin.sunnah');
+    Route::get('admin/sunnah/add', 'create')->name('admin.sunnah.create');
     Route::post('/admin/sunnah/add', 'store')->name('admin.sunnah.add');
+    Route::get('/admin/sunnah/edit/{id}', 'edit')->name('admin.sunnah.edit');
+    Route::put('/admin/sunnah/update/{id}', 'update')->name('admin.sunnah.update');
+    Route::get('/admin/sunnah/delete/{id}', 'destroy')->name('admin.sunnah.delete');
 });
 //ROUTE AUTH
 Route::controller(AuthController::class)->group(function(){
     Route::get('/admin/signin', 'index')->middleware('alreadyAuthenticated');
     Route::post('/admin/signin', 'signIn')->name('admin.signin');
     Route::get('/admin/signout', 'signOut')->name('admin.logout')->middleware('auth');
+});
+
+Route::controller(\App\Http\Controllers\UserKajianController::class)->middleware('auth')->group(function (){
+    Route::get('/kajian', 'index')->name('kajian');
+});
+Route::controller(\App\Http\Controllers\UserSunnahController::class)->middleware('auth')->group(function (){
+    Route::get('/sunnah', 'index')->name('sunnah');
 });

@@ -40,7 +40,7 @@
             <textarea id="description" name="description"></textarea>
         </label>
         <div class="col-span-2 items-end">
-            <button class="btn btn-primary max-w-24 " type="submit">
+            <button class="btn bg-primary text-white hover:bg-tertiary hover:text-primary max-w-24 " type="submit">
                 Submit
             </button>
         </div>

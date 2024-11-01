@@ -1,7 +1,7 @@
 @props(['link', 'active'])
 @php
     $classes = ($active ?? false)
-                ? 'bg-primary text-white cursor-pointer px-2 py-1 rounded-full'
+                ? 'bg-primary text-white delay-100 transition-all cursor-pointer px-2 py-1 rounded-full'
                 : 'cursor-pointer px-2 py-1 rounded-full ';
 @endphp
 

@@ -49,11 +49,8 @@
                         <div class="md:w-1/5 w-1/4">
                             {{$d->jam}}
                         </div>
-                        <div class="md:w-1/5 w-1/4 justify-center grid grid-cols-2 items-center">
-                            <a href="{{route('admin.kajian.show', ['id'=> $d->id])}}" class="btn hover:bg-tertiary col-span-1 max-w-min hover:text-primary cursor-pointer text-white bg-primary mx-auto">
-                                <x-icon.open-book/>
-                            </a>
-                            <div class="dropdown dropdown-end col-span-1 mx-auto">
+                        <div class="md:w-1/5 w-1/4 justify-center flex items-center">
+                            <div class="dropdown dropdown-end ">
                                 <div tabindex="0" role="button" class=" m-1"><x-icon.menu/></div>
                                 <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-md z-[1] w-44 p-2 shadow">
                                     <li><a href="{{route('admin.kajian.edit', ['id'=> $d->id])}}">edit data</a></li>

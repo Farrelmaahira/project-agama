@@ -17,7 +17,7 @@ class SunnahController extends Controller
             $data = Sunnah::all();
             return view('admin.sunnah.sunnah', compact('data'));
         } catch (\Throwable $th) {
-            
+
         }
     }
 
@@ -26,7 +26,7 @@ class SunnahController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.sunnah.add-sunnah');
     }
 
     /**
@@ -89,7 +89,7 @@ class SunnahController extends Controller
                 return redirect()->intended('/admin/sunnah');
             }
 
-            dd($data);
+            return view('admin.sunnah.edit-sunnah', compact('data'));
         } catch(\Throwable $e) {
             dd($e);
         }
@@ -118,7 +118,7 @@ class SunnahController extends Controller
                 $payload['foto'] = $path;
             }
 
-            $sunnah = Sunnah::find($id); 
+            $sunnah = Sunnah::find($id);
 
             if($sunnah == null) {
                 return redirect()->intended('/admin/sunnah')->with('error', 'Data not found');
@@ -126,7 +126,7 @@ class SunnahController extends Controller
 
             $sunnah->update($payload);
 
-            dd($sunnah);
+            return redirect()->route('admin.sunnah');
         } catch (\Throwable $th) {
             dd($th);
         }

@@ -1,4 +1,4 @@
-<div class=" w-full md:h-22 h-20 flex items-center p-4 md:px-28 px-6 text-primary justify-between">
+<div class=" w-full md:h-22 h-20 flex items-center p-4 md:px-28 px-6 text-primary justify-between fixed bg-white" id="navbar">
     <div class="flex-wrap bg-transparent text-primary px-2 py-1 rounded-full">
         <a class="font-bold md:text-3xl text-lg" href="#">
              IslamPro
@@ -18,3 +18,15 @@
         </ul>
     </div>
 </div>
+{{--<script>--}}
+{{--    window.addEventListener("scroll", function() {--}}
+{{--        const navbar = document.getElementById("navbar");--}}
+{{--        if (window.scrollY > 50) {--}}
+{{--            navbar.classList.add("bg-primary", "fixed"); // Ganti warna dan padding sesuai keinginan--}}
+{{--            navbar.classList.remove("bg-transparent");--}}
+{{--        } else {--}}
+{{--            navbar.classList.add("bg-transparent");--}}
+{{--            navbar.classList.remove("bg-primary", "fixed");--}}
+{{--        }--}}
+{{--    });--}}
+{{--</script>--}}
