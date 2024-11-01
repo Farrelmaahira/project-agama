@@ -1,5 +1,5 @@
 <x-layouts.app>
-    <section class="md:h-[100vh] h-[90vh] w-full relative" id="hero">
+    <section class="md:h-[100vh] h-[90vh] w-full relative -z-10" id="hero">
         <div class="absolute inset-0 w-full h-[100vh]">
             {{-- content tengah --}}
             <div class="md:translate-y-24 translate-y-24 h-80 w-full grid md:grid-cols-2 grid-cols-1 gap-12">

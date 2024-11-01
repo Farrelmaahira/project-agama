@@ -52,7 +52,7 @@
     @endif
     <div class="flex h-screen">
         <!-- Sidebar -->
-        <div class="md:w-1/6 h-screen md:block hidden shadow-gray-400 shadow-md">
+        <div class="md:w-1/6 h-screen md:block hidden shadow-gray-400 shadow-md relative">
             <h1 class="text-2xl text-gray-800 text-center font-bold mt-6">
                 IslamPro
             </h1>
@@ -69,6 +69,13 @@
                <x-icon.college/>
                Settings
            </x-admin-nav-link>
+            <div class="absolute  bottom-0 px-6 w-full mb-4">
+                <a class="border-2 py-2 px-4 border-gray-200 rounded-md flex gap-6 justify-start hover:border-primary hover:bg-primary hover:text-white cursor-pointer delay-100" href="{{route('admin.logout')}}">
+                    <x-icon.signout/>
+                    Sign Out
+                </a>
+            </div>
+
         </div>
 
         <!-- Content Area -->
