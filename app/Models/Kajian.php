@@ -9,6 +9,7 @@ class Kajian extends Model
 {
     use HasFactory;
 
+    protected $dates = ['tanggal'];
     protected $fillable = [
         'judul',
         'tanggal',
@@ -17,3 +18,5 @@ class Kajian extends Model
         'foto'
     ];
 }
+
+
