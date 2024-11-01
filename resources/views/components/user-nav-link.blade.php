@@ -1,8 +1,8 @@
 @props(['link', 'active'])
 @php
     $classes = ($active ?? false)
-                ? 'bg-primary text-white delay-100 transition-all cursor-pointer px-2 py-1 rounded-full'
-                : 'cursor-pointer px-2 py-1 rounded-full ';
+                ? 'bg-primary text-white transition-colors duration-300 delay-100 cursor-pointer px-2 py-1 rounded-full'
+                : 'cursor-pointer px-2 py-1 rounded-full transition-colors duration-300';
 @endphp
 
 <li>
