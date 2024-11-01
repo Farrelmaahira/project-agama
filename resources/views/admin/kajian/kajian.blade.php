@@ -54,10 +54,10 @@
                                 <div tabindex="0" role="button" class=" m-1"><x-icon.menu/></div>
                                 <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-md z-[1] w-44 p-2 shadow">
                                     <li><a href="{{route('admin.kajian.edit', ['id'=> $d->id])}}">edit data</a></li>
-                                    <li><button class="bg-transparent text-start border-none" onclick="my_modal_1.showModal()">hapus data</button></li>
+                                    <li><button class="bg-transparent text-start border-none" onclick="hapus_kajian.showModal()">hapus data</button></li>
                                 </ul>
 {{--                                delete alert modals--}}
-                                <dialog id="my_modal_1" class="modal">
+                                <dialog id="hapus_kajian" class="modal">
                                     <div class="modal-box">
                                         <form method="dialog">
                                             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>

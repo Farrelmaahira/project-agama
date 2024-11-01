@@ -54,7 +54,7 @@
         <!-- Sidebar -->
         <div class="md:w-1/6 h-screen md:block hidden shadow-gray-400 shadow-md relative">
             <h1 class="text-2xl text-gray-800 text-center font-bold mt-6">
-                IslamPro
+                Itik.id
             </h1>
             <div class="my-14"></div>
            <x-admin-nav-link :active="request()->routeIs('admin.kajian')" :link="route('admin.kajian')">

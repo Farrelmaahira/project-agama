@@ -49,9 +49,9 @@ Route::controller(AuthController::class)->group(function(){
     Route::get('/admin/signout', 'signOut')->name('admin.logout')->middleware('auth');
 });
 
-Route::controller(\App\Http\Controllers\UserKajianController::class)->middleware('auth')->group(function (){
+Route::controller(\App\Http\Controllers\UserKajianController::class)->group(function (){
     Route::get('/kajian', 'index')->name('kajian');
 });
-Route::controller(\App\Http\Controllers\UserSunnahController::class)->middleware('auth')->group(function (){
+Route::controller(\App\Http\Controllers\UserSunnahController::class)->group(function (){
     Route::get('/sunnah', 'index')->name('sunnah');
 });
