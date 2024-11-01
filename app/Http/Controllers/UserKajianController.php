@@ -51,7 +51,12 @@ class UserKajianController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            $data = Kajian::find($id);
+            return view('admin.kajian.detail-kajian', compact('data'));
+        } catch (\Throwable $e) {
+            return redirect()->route('admin.kajian')->with('error', $e);
+        }
     }
 
     /**

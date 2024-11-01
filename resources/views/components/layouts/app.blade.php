@@ -19,6 +19,7 @@
 <body class="h-[100dvh] overflow-y-scroll scroll-smooth font-poppins">
     {{--    header    --}}
     @include('components.layouts.navigation')
+    <div class="md:h-22 h-20"></div>
     {{--    body      --}}
     <main>
         @if(session('success') || session('error') || session('info'))

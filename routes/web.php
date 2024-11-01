@@ -51,7 +51,9 @@ Route::controller(AuthController::class)->group(function(){
 
 Route::controller(\App\Http\Controllers\UserKajianController::class)->group(function (){
     Route::get('/kajian', 'index')->name('kajian');
+    Route::get('/kajian/{id}', 'show')->name('kajian.show');
 });
 Route::controller(\App\Http\Controllers\UserSunnahController::class)->group(function (){
     Route::get('/sunnah', 'index')->name('sunnah');
+    Route::get('/sunnah/{id}', 'show')->name('sunnah.show');
 });

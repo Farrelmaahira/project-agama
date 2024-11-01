@@ -1,7 +1,7 @@
 <x-layouts.app>
     <div class="md:px-28 px-6 md:py-6 grid md:grid-cols-3 grid-cols-1 gap-4">
         @forelse($data as $d)
-            <div class="bg-secondary md:p-4 rounded-md col-span-1 md:gap-4 gap-2 grid md:grid-cols-2 grid-cols-1">
+            <a class="bg-secondary md:p-4 rounded-md col-span-1 md:gap-4 gap-2 grid md:grid-cols-2 grid-cols-1 hover:shadow-primary hover:shadow cursor-pointer delay-100">
                 <div class="col-span-1">
                     <img src="{{ asset('storage/' . $d->foto) }}" class="object-cover h-64 w-full rounded-md">
                 </div>
@@ -19,7 +19,7 @@
                         {!! htmlspecialchars_decode($d->description) !!}
                     </div>
                 </div>
-            </div>
+            </a>
         @empty
         @endforelse
 

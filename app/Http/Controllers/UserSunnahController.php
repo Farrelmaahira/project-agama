@@ -37,7 +37,17 @@ class UserSunnahController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            $data = Sunnah::find($id);
+
+            if($data == null) {
+                return redirect()->intended('/admin/sunnah');
+            }
+
+            return view('user.sunnah.detail-sunnah', ['data'=>$data]);
+        } catch(\Throwable $e) {
+            dd($e);
+        }
     }
 
     /**
