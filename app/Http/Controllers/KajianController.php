@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Kajian;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
-
-use function PHPUnit\Framework\isNull;
 
 class KajianController extends Controller
 {
@@ -18,8 +15,18 @@ class KajianController extends Controller
     {
         try {
             $data = Kajian::all();
-            return view('admin.kajian.kajian', ["data" => $data]);
+            $collectedData = collect($data);
+
+            $collectedData->map(function($item){
+                $date = $item->tanggal;
+                $formattedDate = Carbon::parse($date)->translatedFormat('l, d F Y');
+                $item->tanggal = $formattedDate;
+                return $item;
+            });
+            
+            return view('admin.kajian.kajian', ["data" => $collectedData]);
         } catch (\Throwable $e) {
+            dd($e);
             return view('admin.kajian.kajian')->with('error', $e);
         }
     }

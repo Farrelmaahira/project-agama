@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kajian;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class UserKajianController extends Controller
@@ -12,8 +13,21 @@ class UserKajianController extends Controller
      */
     public function index()
     {
-        $data = Kajian::all();
-        return view('user.kajian.kajian', compact('data'));
+
+        try {
+            $data = Kajian::all();
+            $collectedData = collect($data);
+            $collectedData->map(function($item){
+                $date = $item->tanggal;
+                $formattedDate = Carbon::parse($date)->translatedFormat('l, d F Y');
+                $item->tanggal = $formattedDate;
+                return $item;
+            });
+
+            return view('user.kajian.kajian', ['data' => $collectedData]);
+        } catch (\Throwable $th) {
+            return redirect()->intended('/kajian')->with('error', $th);
+        }
     }
 
     /**
