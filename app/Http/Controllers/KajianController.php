@@ -11,20 +11,29 @@ class KajianController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $data = Kajian::all();
-            $collectedData = collect($data);
+            $query = Kajian::query();
 
-            $collectedData->map(function($item){
+            if($request->has('search')) {
+                $query->where('judul', 'like', '%' . $request->search . '%')->orWhere('description', 'like', '%' . $request->search . '%');
+            }
+
+            $data = $query->paginate(10);
+            dd($data);
+
+            $collectedData = collect($data);
+            $formattedDateData = collect($collectedData['data']);
+            $formattedDateData->map(function($item){
                 $date = $item->tanggal;
-                $formattedDate = Carbon::parse($date)->translatedFormat('l, d F Y');
-                $item->tanggal = $formattedDate;
+                $frmtdDate = Carbon::parse($date)->translatedFormat('l, d F Y');
+                $item->tanggal = $frmtdDate;
                 return $item;
             });
-            
-            return view('admin.kajian.kajian', ["data" => $collectedData]);
+
+
+            // return view('admin.kajian.kajian', ["data" => $collectedData]);
         } catch (\Throwable $e) {
             dd($e);
             return view('admin.kajian.kajian')->with('error', $e);

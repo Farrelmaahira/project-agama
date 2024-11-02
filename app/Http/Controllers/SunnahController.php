@@ -11,13 +11,22 @@ class SunnahController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $data = Sunnah::all();
+            $query = Sunnah::query(); 
+
+            if($request->has('search')) {
+               $query->where('judul', 'like', '%' . $request->search . '%' )->orWhere('description', 'like', '%' . $request->search . '%'); 
+            }
+
+            $data = $query->get();
+            dd($data);
+
             return view('admin.sunnah.sunnah', compact('data'));
         } catch (\Throwable $th) {
-
+            dd($th);
+            return redirect()->intended('/sunnah')->with('error', $th);
         }
     }
 
