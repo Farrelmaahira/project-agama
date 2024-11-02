@@ -62,12 +62,8 @@
                Kajian
            </x-admin-nav-link>
             <x-admin-nav-link :active="request()->routeIs('admin.sunnah')" :link="route('admin.sunnah')">
-               <x-icon.college/>
+               <x-icon.book/>
                Sunnah
-           </x-admin-nav-link>
-            <x-admin-nav-link >
-               <x-icon.college/>
-               Settings
            </x-admin-nav-link>
             <div class="absolute  bottom-0 px-6 w-full mb-4">
                 <a class="border-2 py-2 px-4 border-gray-200 rounded-md flex gap-6 justify-start hover:border-primary hover:bg-primary hover:text-white cursor-pointer delay-100" href="{{route('admin.logout')}}">
@@ -88,6 +84,8 @@
                 </header>
             @endif
             {{ $slot }}
+                <div class="h-28"></div>
+                <x-layouts.admin-bottom-nav/>
         </div>
     </div>
 </main>

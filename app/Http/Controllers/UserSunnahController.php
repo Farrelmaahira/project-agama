@@ -14,7 +14,7 @@ class UserSunnahController extends Controller
     {
 
         try {
-            
+
             $query = Sunnah::query();
 
             if($request->has('search')) {
@@ -55,7 +55,7 @@ class UserSunnahController extends Controller
             $data = Sunnah::find($id);
 
             if($data == null) {
-                return redirect()->intended('/admin/sunnah');
+                return redirect()->intended(route('sunnah'));
             }
 
             return view('user.sunnah.detail-sunnah', ['data'=>$data]);

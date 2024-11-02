@@ -16,6 +16,7 @@ export default {
                 secondary: "#C8A1E0",
                 tertiary: "#F1DFE8",
                 font: "#F7EFE5",
+                bgimage: "#F7F6F1",
                 base: "#FEFCFA"
             }
         },

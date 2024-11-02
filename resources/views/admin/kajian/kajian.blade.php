@@ -1,6 +1,6 @@
 <x-layouts.admin-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center">
+        <div class="md:flex hidden justify-between items-center">
             <h2 class="font-semibold text-xl text-primary leading-tight">
                 {{ __('Kajian') }}
             </h2>
@@ -10,6 +10,28 @@
                     <button class="btn join-item rounded-r-md" type="submit">search</button>
                 </form>
             </div>
+        </div>
+        <div class="flex md:hidden justify-between items-center w-full ">
+            <h1 class="font-bold md:text-3xl text-2xl" >
+                Itik.id
+            </h1>
+            <button class="flex flex-col items-center  p-2" onclick="logout.showModal()">
+                <x-icon.signout/>
+            </button>
+            <dialog id="logout" class="modal">
+                <div class="modal-box">
+                    <form method="dialog">
+                        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                    </form>
+                    <h3 class="text-lg font-bold">Alert!</h3>
+                    <p class="py-4">Apakah anda yakin ingin logout?</p>
+                    <div class="modal-action">
+                        <a class="btn bg-primary text-white hover:text-primary hover:bg-tertiary" href="{{route('admin.logout')}}">
+                            logout
+                        </a>
+                    </div>
+                </div>
+            </dialog>
         </div>
     </x-slot>
     <div class="text-sm">
@@ -56,10 +78,10 @@
                                 <div tabindex="0" role="button" class=" m-1"><x-icon.menu/></div>
                                 <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-md z-[1] w-44 p-2 shadow">
                                     <li><a href="{{route('admin.kajian.edit', ['id'=> $d->id])}}">edit data</a></li>
-                                    <li><button class="bg-transparent text-start border-none" onclick="hapus_kajian.showModal()">hapus data</button></li>
+                                    <li><button class="bg-transparent text-start border-none" onclick="hapus_kajian_{{$d->id}}.showModal()">hapus data</button></li>
                                 </ul>
 {{--                                delete alert modals--}}
-                                <dialog id="hapus_kajian" class="modal">
+                                <dialog id="hapus_kajian_{{ $d->id }}" class="modal">
                                     <div class="modal-box">
                                         <form method="dialog">
                                             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>

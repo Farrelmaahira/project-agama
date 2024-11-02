@@ -1,6 +1,10 @@
-<div class=" w-full md:h-22 h-20 flex items-center p-4 md:px-28 px-6 text-primary justify-between fixed bg-white z-20" id="navbar">
+<?php
+//    if(request()->routeIs(''))
+//?><!---->
+
+<div class=" w-full md:h-22 h-20 flex items-center p-4 md:px-28 text-primary justify-between fixed bg-white z-20 " id="navbar">
     <div class="flex-wrap bg-transparent text-primary px-2 py-1 rounded-full">
-        <a class="font-bold md:text-3xl text-lg" href="#">
+        <a class="font-bold md:text-3xl text-2xl" href="{{route('surah')}}">
              Itik.id
         </a>
     </div>
