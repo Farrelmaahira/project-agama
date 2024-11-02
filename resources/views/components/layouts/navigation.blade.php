@@ -19,7 +19,7 @@
         </ul>
     </div>
 </div>
-<div class="md:h-22 h-20"></div>
+
 {{--<script>--}}
 {{--    window.addEventListener("scroll", function() {--}}
 {{--        const navbar = document.getElementById("navbar");--}}
