@@ -21,19 +21,8 @@ class KajianController extends Controller
             }
 
             $data = $query->paginate(10);
-            dd($data);
 
-            $collectedData = collect($data);
-            $formattedDateData = collect($collectedData['data']);
-            $formattedDateData->map(function($item){
-                $date = $item->tanggal;
-                $frmtdDate = Carbon::parse($date)->translatedFormat('l, d F Y');
-                $item->tanggal = $frmtdDate;
-                return $item;
-            });
-
-
-            // return view('admin.kajian.kajian', ["data" => $collectedData]);
+            return view('admin.kajian.kajian', ["data" => $data]);
         } catch (\Throwable $e) {
             dd($e);
             return view('admin.kajian.kajian')->with('error', $e);

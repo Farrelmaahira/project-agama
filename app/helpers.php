@@ -1,4 +1,5 @@
 <?php
+use Carbon\Carbon;
 
 if (!function_exists('convertToArabicNumerals')) {
     function convertToArabicNumerals($number)
@@ -9,3 +10,9 @@ if (!function_exists('convertToArabicNumerals')) {
         return str_replace($western_arabic, $eastern_arabic, $number);
     }
 }
+
+   function formatingDate($data) 
+   {
+        $date = Carbon::parse($data)->translatedFormat('l, d F Y');
+        return $date;
+   } 

@@ -5,8 +5,10 @@
                 {{ __('Kajian') }}
             </h2>
             <div class="join hidden md:block">
-                <input class="input input-bordered join-item" placeholder="query" />
-                <button class="btn join-item rounded-r-md">search</button>
+                <form action="{{route('admin.kajian')}}" method="get">
+                    <input class="input input-bordered join-item" placeholder="query" name="search"/>
+                    <button class="btn join-item rounded-r-md" type="submit">search</button>
+                </form>
             </div>
         </div>
     </x-slot>
@@ -44,7 +46,7 @@
                             {{$d->judul}}
                         </div>
                         <div class="md:w-1/5 w-1/4">
-                            {{$d->tanggal}}
+                            {{formatingDate($d->tanggal)}}
                         </div>
                         <div class="md:w-1/5 w-1/4">
                             {{$d->jam}}

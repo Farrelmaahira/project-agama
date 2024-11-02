@@ -20,8 +20,7 @@ class SunnahController extends Controller
                $query->where('judul', 'like', '%' . $request->search . '%' )->orWhere('description', 'like', '%' . $request->search . '%'); 
             }
 
-            $data = $query->get();
-            dd($data);
+            $data = $query->paginate(10);
 
             return view('admin.sunnah.sunnah', compact('data'));
         } catch (\Throwable $th) {

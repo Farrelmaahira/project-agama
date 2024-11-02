@@ -11,20 +11,22 @@ class UserKajianController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
 
         try {
-            $data = Kajian::all();
-            $collectedData = collect($data);
-            $collectedData->map(function($item){
-                $date = $item->tanggal;
-                $formattedDate = Carbon::parse($date)->translatedFormat('l, d F Y');
-                $item->tanggal = $formattedDate;
-                return $item;
-            });
+            // $data = Kajian::all();
 
-            return view('user.kajian.kajian', ['data' => $collectedData]);
+            $query = Kajian::query();
+
+            if($request->has('search')) {
+                $query->where('judul', 'like', '%' . $request->search . '%')
+                    ->orWhere('description', 'like', '%' . $request->search . '%');
+            }
+
+            $data = $query->paginate(6);
+            return view('user.kajian.kajian', ['data' => $data]);
+
         } catch (\Throwable $th) {
             return redirect()->intended('/kajian')->with('error', $th);
         }

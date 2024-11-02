@@ -10,10 +10,24 @@ class UserSunnahController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Sunnah::all();
-        return view('user.sunnah.sunnah', compact('data'));
+
+        try {
+            
+            $query = Sunnah::query();
+
+            if($request->has('search')) {
+                $query->where('title', 'like', '%' . $request->search . '%')
+                    ->orWhere('description', 'like', '%' . $request->search . '%');
+            }
+
+            $data = $query->paginate(6);
+
+            return view('user.sunnah.sunnah', compact('data'));
+        } catch (\Throwable $th) {
+            return view('user.sunnah.sunnah')->with('error', $th);
+        }
     }
 
     /**

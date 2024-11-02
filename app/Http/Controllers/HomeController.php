@@ -60,11 +60,13 @@ class HomeController extends Controller
         try {
             if (Cache::has('surah-' . $id)) {
                 $data = Cache::get('surah-' . $id);
+                dd($data);
                 return view('user.surah.detail', ['data' => $data]);
             }
 
             $res = Cache::remember('surah-' . $id, now()->addMinutes(150), function () use ($id) {
-                return Http::get($this->urlAPI . '/surat/' . $id . '.json?print=pretty')->json();
+                $data = Http::get($this->urlAPI . '/surat/' . $id . '.json?print=pretty')->json();
+                return $data;
             });
 
             $newData = collect($res)->map(function ($item) {

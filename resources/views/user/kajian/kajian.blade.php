@@ -10,7 +10,7 @@
                         {{$d->judul}}
                     </h1>
                     <h1 class="mb-1">
-                        Tanggal: {{$d->tanggal}}
+                        Tanggal: {{formatingDate($d->tanggal)}}
                     </h1>
                     <h1 class="mb-1">
                         Jam: {{$d->jam}}
