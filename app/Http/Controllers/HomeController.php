@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kajian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
@@ -49,8 +50,10 @@ class HomeController extends Controller
                 }
                 return $data;
             });
-            return view('user.welcome', ['data' => $res]);
+            $dataKajian = Kajian::latest()->take(4)->get();
+            return view('user.welcome', ['data' => $res, 'kajian' => $dataKajian]);
         } catch (\Throwable $e) {
+            dd($e);
             return view('user.welcome')->with('error', $e);
         }
     }

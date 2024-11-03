@@ -4,20 +4,29 @@
             <h2 class="font-semibold text-xl text-primary leading-tight">
                 {{ __('Kajian') }}
             </h2>
-            <div class="join hidden md:block">
-                <form action="{{route('admin.kajian')}}" method="get">
-                    <input class="input input-bordered join-item" placeholder="query" name="search"/>
-                    <button class="btn join-item rounded-r-md" type="submit">search</button>
-                </form>
+            <div class="hidden md:block">
+                <x-search :link="route('admin.kajian')"/>
             </div>
+
         </div>
         <div class="flex md:hidden justify-between items-center w-full ">
             <h1 class="font-bold md:text-3xl text-2xl" >
                 Itik.id
             </h1>
-            <button class="flex flex-col items-center  p-2" onclick="logout.showModal()">
-                <x-icon.signout/>
-            </button>
+                <div class="dropdown dropdown-end transition-all duration-300 ease-in-out">
+                    <div tabindex="0" role="button" class="btn btn-circle  hover:btn-circle btn-ghost text-primary  hover:bg-primary hover:text-tertiary"><x-icon.bars-3/></div>
+                    <ul tabindex="0" class="dropdown-content  bg-base-100 rounded-box z-[1] my-4 max-w-xl p-2 shadow flex flex-col gap-2">
+                            <li class="max-w-xl">
+                                <x-search :link="route('admin.kajian')" autofocus/>
+                            </li>
+                            <li class="flex justify-end max-w-xl">
+                                <button onclick="logout.showModal()" class="border-2 py-2 px-2 w-full border-gray-200 max-w-xl rounded-md flex gap-6 justify-start hover:border-primary hover:bg-primary hover:text-white cursor-pointer delay-100" >
+                                    <x-icon.signout/>
+                                    Sign Out
+                                </button>
+                            </li>
+                    </ul>
+                </div>
             <dialog id="logout" class="modal">
                 <div class="modal-box">
                     <form method="dialog">
@@ -99,10 +108,11 @@
                         </div>
                     </div>
                 @empty
-                <div class="w-full flex gap-1 mt-2 bg-white  text-center py-2 border-2 border-gray-200 rounded-md justify-center items-center">
-                        KOSONG
-                </div>
+                <x-blank-page/>
                 @endforelse
+            <div  class="my-4">
+                {{$data->links()}}
+            </div>
         </div>
     </div>
 

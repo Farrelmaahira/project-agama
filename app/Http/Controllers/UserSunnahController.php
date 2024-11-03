@@ -18,7 +18,7 @@ class UserSunnahController extends Controller
             $query = Sunnah::query();
 
             if($request->has('search')) {
-                $query->where('title', 'like', '%' . $request->search . '%')
+                $query->where('judul', 'like', '%' . $request->search . '%')
                     ->orWhere('description', 'like', '%' . $request->search . '%');
             }
 
@@ -26,7 +26,8 @@ class UserSunnahController extends Controller
 
             return view('user.sunnah.sunnah', compact('data'));
         } catch (\Throwable $th) {
-            return view('user.sunnah.sunnah')->with('error', $th);
+            dd($th);
+            return redirect()->route('sunnah')->with('error', $th);
         }
     }
 

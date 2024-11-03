@@ -22,7 +22,14 @@
                 </div>
             </a>
         @empty
-        @endforelse
+            <div class="col-span-1 md:col-span-2">
+                <x-blank-page/>
+            </div>
 
+        @endforelse
+        <div  class="md:col-span-2 col-span-1">
+            {{$data->links()}}
+        </div>
     </div>
+
 </x-layouts.app>

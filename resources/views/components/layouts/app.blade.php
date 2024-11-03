@@ -53,7 +53,7 @@
             </div>
         @endif
         {{ $slot }}
-            <div class="h-28"></div>
+            <div class="h-28 md:h-0"></div>
         <x-layouts.bottom-nav/>
     </main>
 

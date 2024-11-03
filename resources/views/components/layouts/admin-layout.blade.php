@@ -66,10 +66,24 @@
                Sunnah
            </x-admin-nav-link>
             <div class="absolute  bottom-0 px-6 w-full mb-4">
-                <a class="border-2 py-2 px-4 border-gray-200 rounded-md flex gap-6 justify-start hover:border-primary hover:bg-primary hover:text-white cursor-pointer delay-100" href="{{route('admin.logout')}}">
+                <button onclick="logout_desktop.showModal()" class="border-2 py-2 px-2 w-full border-gray-200 max-w-xl rounded-md flex gap-6 justify-start hover:border-primary hover:bg-primary hover:text-white cursor-pointer delay-100" >
                     <x-icon.signout/>
                     Sign Out
-                </a>
+                </button>
+                <dialog id="logout_desktop" class="modal">
+                    <div class="modal-box">
+                        <form method="dialog">
+                            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                        </form>
+                        <h3 class="text-lg font-bold">Alert!</h3>
+                        <p class="py-4">Apakah anda yakin ingin logout?</p>
+                        <div class="modal-action">
+                            <a class="btn bg-primary text-white hover:text-primary hover:bg-tertiary" href="{{route('admin.logout')}}">
+                                logout
+                            </a>
+                        </div>
+                    </div>
+                </dialog>
             </div>
 
         </div>

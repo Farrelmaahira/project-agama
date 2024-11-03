@@ -16,6 +16,10 @@
                 </div>
             </a>
         @empty
+            <div class="col-span-1">
+                <x-blank-page/>
+            </div>
+
         @endforelse
     </div>
 </x-layouts.app>

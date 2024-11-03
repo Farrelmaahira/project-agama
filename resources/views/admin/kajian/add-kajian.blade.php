@@ -1,6 +1,11 @@
 <x-layouts.admin-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center py-4 border-b-2">
+        <div class="flex justify-start items-center py-4 border-b-2">
+            <a class="btn btn-circle btn-ghost text-primary md:hidden cursor-pointer"  href="{{url()->previous()}}">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                </svg>
+            </a>
             <h2 class="font-semibold text-xl text-primary leading-tight">
                 {{ __('Tambah Kajian') }}
             </h2>
