@@ -24,7 +24,7 @@ class UserKajianController extends Controller
                     ->orWhere('description', 'like', '%' . $request->search . '%');
             }
 
-            $data = $query->paginate(6);
+            $data = $query->paginate(4);
             return view('user.kajian.kajian', ['data' => $data]);
 
         } catch (\Throwable $th) {

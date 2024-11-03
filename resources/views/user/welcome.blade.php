@@ -17,7 +17,7 @@
                         <div class="flex justify-center md:justify-start">
                             <button id="scrollButton"
                                 class="md:p-4 p-2 border-2 border-primary cursor-pointer text-primary rounded-lg hover:bg-primary hover:text-white">
-                                Al-Qur'an
+                                Read Quran
                             </button>
                         </div>
                     </div>

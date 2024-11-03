@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muslim Pro</title>
+    <title>Itik.Id</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -21,7 +21,7 @@
 
 <main>
     <div class="absolute z-50 ">
-        @if(session('success') || session('error') || session('info') || count($errors->all()) > 0)
+        @if(session('success') || session('error') || session('info') || $errors->any())
             <div class="py-6">
                 <div class="max-w-12xl toast toast-end toast-top mx-auto sm:px-6 lg:px-8">
                     @if(session('success'))
@@ -33,7 +33,7 @@
                             {{session('info')}}
                         </div>
                     @elseif (session('error'))
-                        <div class="alert-info alert">
+                        <div class="alert-error alert">
                             {{session('error')}}
                         </div>
                     @endif
