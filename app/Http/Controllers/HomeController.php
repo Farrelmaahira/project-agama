@@ -37,21 +37,21 @@ class HomeController extends Controller
     public function index()
     {
         try {
+            $data = [];
             if (Cache::has('list-surah')) {
                 $data = Cache::get('list-surah');
-                return view('user.welcome', data: ['data' => $data]);
+            } else {
+                $data = Cache::remember('list-surah', now()->addMinutes(150), function () {
+                    $res = Http::get($this->urlAPI . '/data.json?print=pretty')->json();
+                    foreach ($res as $key => $value) {
+                        $res[$key]['slug'] = $this->slugMaker($value['nama']);
+                    }
+                    return $res;
+                });
             }
 
-            $res = Cache::remember('list-surah', now()->addMinutes(150), function () {
-                $data = Http::get($this->urlAPI . '/data.json?print=pretty')->json();
-                foreach ($data as $key => $value) {
-
-                    $data[$key]['slug'] = $this->slugMaker($value['nama']);
-                }
-                return $data;
-            });
             $dataKajian = Kajian::latest()->take(4)->get();
-            return view('user.welcome', ['data' => $res, 'kajian' => $dataKajian]);
+            return view('user.welcome', ['data' => $data, 'kajian' => $dataKajian]);
         } catch (\Throwable $e) {
             dd($e);
             return view('user.welcome')->with('error', $e);
@@ -61,28 +61,29 @@ class HomeController extends Controller
     public function show(int $id)
     {
         try {
+            $data = [];
+
             if (Cache::has('surah-' . $id)) {
                 $data = Cache::get('surah-' . $id);
-                dd($data);
                 return view('user.surah.detail', ['data' => $data]);
             }
 
-            $res = Cache::remember('surah-' . $id, now()->addMinutes(150), function () use ($id) {
-                $data = Http::get($this->urlAPI . '/surat/' . $id . '.json?print=pretty')->json();
-                return $data;
+            $data = Cache::remember('surah-' . $id, now()->addMinutes(150), function () use ($id) {
+                $res = Http::get($this->urlAPI . '/surat/' . $id . '.json?print=pretty')->json();
+                $newData = collect($res)->map(function ($item) {
+                    if (Str::contains($item['ar'], 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ')) {
+                        $item['bismillah'] = 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ';
+                        $item['ar'] = str_replace('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', '', $item['ar']);
+                    } else {
+                        $item['bismillah'] = null;
+                    }
+                    return $item;
+                });
+
+                return $newData;
             });
 
-            $newData = collect($res)->map(function ($item) {
-                if (Str::contains($item['ar'], 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ')) {
-                    $item['bismillah'] = 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ';
-                    $item['ar'] = str_replace('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', '', $item['ar']);
-                } else {
-                    $item['bismillah'] = null;
-                }
-                return $item;
-            });
-
-            return view('user.surah.detail', ['data' => $newData]);
+            return view('user.surah.detail', ['data' => $data]);
         } catch (\Throwable $e) {
             return view('user.surah.detail')->with('error', $e->getMessage());
         }

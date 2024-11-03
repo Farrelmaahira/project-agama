@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 //ROUTE HOMEPAGE
 Route::controller(HomeController::class)->group(function(){
     Route::get('/', 'index')->name('surah');
-    Route::get('/surah/{id}', 'show')->name('surah.show');
+    Route::get('/surah/{id}/{slug}', 'show')->name('surah.show');
 });
 
 Route::controller(KajianController::class)->middleware('auth')->group(function(){
