@@ -67,7 +67,7 @@
             @forelse($data as $d)
                 <div class="w-full flex gap-1 mt-2 bg-white  text-center py-2 border-2 border-gray-200 rounded-md items-center cursor-pointer">
                     <div class="w-1/4 md:flex justify-center">
-                        <img src="{{ asset('storage/' . $d->foto) }}" class="w-32 h-20 object-cover rounded-md">
+                        <img src="{{ $d->foto!= null?asset('storage/' . $d->foto):asset('images/no-image.jpg') }}" class="w-32 h-20 object-cover rounded-md">
                     </div>
                     <div class="w-1/4 truncate">
                         {{$d->judul}}
@@ -104,7 +104,7 @@
                 <x-blank-page/>
             @endforelse
             <div  class="my-4">
-                {{$data->links()}}
+                {!! $data->withQueryString()->links() !!}
             </div>
         </div>
     </div>

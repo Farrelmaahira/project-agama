@@ -1,17 +1,6 @@
 <x-layouts.blank>
     <div class="h-screen w-full relative ">
-        @if($errors->any())
-            <div class="font-bold text-red-500">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>
-                            {{$error}}
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        <div class="md:w-[32rem] md:h-[28rem] w-[20rem] min-h-[22rem] shadow-md drop-shadow shadow-gray-200 md:rounded-2xl rounded-md p-6 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white">
+        <div class="md:w-[32rem] md:h-[28rem] w-[20rem] min-h-[22rem]  shadow-md drop-shadow shadow-gray-200 md:rounded-2xl rounded-md p-6 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white">
             <h1 class="md:text-4xl text-2xl text-center font-extrabold text-gray-800 ">
                 Login
             </h1>

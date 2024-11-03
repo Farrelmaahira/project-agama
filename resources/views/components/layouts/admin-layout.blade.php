@@ -20,36 +20,38 @@
 <body class="font-poppins">
 
 <main>
-    @if(session('success') || session('error') || session('info'))
-        <div class="py-6">
-            <div class="max-w-12xl toast toast-end toast-top mx-auto sm:px-6 lg:px-8">
-                @if(session('success'))
-                    <div class="alert-success alert">
-                        {{session('success')}}
-                    </div>
-                @elseif (session('info'))
-                    <div class="alert-info alert">
-                        {{session('info')}}
-                    </div>
-                @elseif (session('error'))
-                    <div class="alert-info alert">
-                        {{session('error')}}
-                    </div>
-                @endif
-                @if(count($errors->all()) > 0)
-                    <div class="alert alert-error">
-                        <ul>
-                            @foreach ($errors->all() as $e)
-                                <li>
-                                    {{$e}}
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+    <div class="absolute z-50 ">
+        @if(session('success') || session('error') || session('info') || count($errors->all()) > 0)
+            <div class="py-6">
+                <div class="max-w-12xl toast toast-end toast-top mx-auto sm:px-6 lg:px-8">
+                    @if(session('success'))
+                        <div class="alert-success alert">
+                            {{session('success')}}
+                        </div>
+                    @elseif (session('info'))
+                        <div class="alert-info alert">
+                            {{session('info')}}
+                        </div>
+                    @elseif (session('error'))
+                        <div class="alert-info alert">
+                            {{session('error')}}
+                        </div>
+                    @endif
+                    @if(count($errors->all()) > 0)
+                        <div class="alert alert-error">
+                            <ul>
+                                @foreach ($errors->all() as $e)
+                                    <li>
+                                        {{$e}}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                </div>
             </div>
-        </div>
-    @endif
+        @endif
+    </div>
     <div class="flex h-screen">
         <!-- Sidebar -->
         <div class="md:w-1/6 h-screen md:block hidden shadow-gray-400 shadow-md relative">
@@ -91,7 +93,7 @@
         <!-- Content Area -->
         <div class="md:w-5/6 w-full h-screen overflow-y-scroll bg-base md:px-4 px-2">
             @if (isset($header))
-                <header class="bg-base">
+                <header class="bg-base w-full">
                     <div class="max-w-12xl mx-auto md:py-3 py-2 ">
                         {{ $header }}
                     </div>

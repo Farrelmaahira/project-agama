@@ -3,7 +3,7 @@
         @forelse($data as $d)
             <a href="{{route('sunnah.show', ['id'=>$d->id])}}" class="bg-white  rounded-lg shadow-gray-400 shadow-md  p-4 grid  grid-cols-4 gap-8 hover:shadow-primary delay-100 hover:shadow cursor-pointer text-primary">
                 <div class="h-52 md:col-span-1 col-span-4  card">
-                    <img src="{{ asset('storage/' . $d->foto) }}" class="object-cover h-52 w-full rounded-md bg-bgimage">
+                    <img src="{{ asset('storage/' . $d->foto)??asset('images/no-image.jpg') }}" class="object-cover h-52 w-full rounded-md bg-bgimage">
                 </div>
                 <div class="md:col-span-3  col-span-4 block">
                     <h1 class="font-bold text-xl  tracking-wider mb-1">
@@ -19,7 +19,9 @@
             <div class="col-span-1">
                 <x-blank-page/>
             </div>
-
         @endforelse
+        <div class="col-span-1">
+            {!! $data->withQueryString()->links() !!}
+        </div>
     </div>
 </x-layouts.app>

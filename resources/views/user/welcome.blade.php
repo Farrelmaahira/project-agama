@@ -43,14 +43,14 @@
             <h1 class="text-primary md:text-2xl text-xl font-semibold ">
                 Kajian Terbaru
             </h1>
-            <div class="border-b-2 border-primary w-full my-6"></div>
+            <div class="border-b-2 border-primary w-full my-2"></div>
         </div>
-        <div class="md:px-28 px-6 py-4 grid md:grid-cols-2 grid-cols-1 gap-4">
+        <div class="md:px-28 px-6 py-2 grid md:grid-cols-2 grid-cols-1 gap-4">
             @forelse($kajian as $key => $d)
                 <a href="{{ route('kajian.show', ['id' => $d->id]) }}"
                     class="bg-white shadow-md shadow-gray-400 text-primary md:p-4 rounded-md col-span-1 md:gap-4 gap-2 grid md:grid-cols-2 grid-cols-1 hover:shadow-primary hover:shadow cursor-pointer delay-100">
                     <div class="col-span-1">
-                        <img src="{{ asset('storage/' . $d->foto) }}" class="object-cover h-56 w-full rounded-md">
+                        <img src="{{ $d->foto!= null?asset('storage/' . $d->foto):asset('images/no-image.jpg') }}" class="object-cover h-56 w-full rounded-md">
                     </div>
                     <div class="col-span-1 px-4 py-2 md:px-0 md:py-0 ">
                         <h1 class="line-clamp-1 hover:line-clamp-2 cursor-pointer mb-1  font-bold">
@@ -73,7 +73,7 @@
                     <x-blank-page />
                 </div>
             @endforelse
-            -
+
         </div>
 
     </section>
@@ -95,7 +95,10 @@
     <script>
         const kajianSection = document.getElementById('kajian');
         const SCROLL_THRESHOLD = kajianSection.getBoundingClientRect().top + window.scrollY -
-        100; // Posisi Y di mana ikon akan berganti
+        100;
+        const surahSection = document.getElementById('surah');
+        const SURAH_SCROLL_THRESHOLD = surahSection.getBoundingClientRect().top + window.scrollY;
+        // Posisi Y di mana ikon akan berganti
         const scrollButton = document.getElementById('scrollButton');
         const returnButton = document.getElementById('returnButton');
         const downArrow = document.getElementById('downArrow');
@@ -127,7 +130,7 @@
 
         // Scroll ke bagian "Surah" saat tombol Al-Qur'an diklik
         scrollButton.addEventListener('click', function() {
-            smoothScrollToY(750, 1000); // Scroll ke section surah
+            smoothScrollToY(SURAH_SCROLL_THRESHOLD - 50, 1000); // Scroll ke section surah
         });
 
         // Scroll ke atas atau bawah menggunakan tombol di kanan bawah

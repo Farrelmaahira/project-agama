@@ -53,7 +53,6 @@ class HomeController extends Controller
             $dataKajian = Kajian::latest()->take(4)->get();
             return view('user.welcome', ['data' => $data, 'kajian' => $dataKajian]);
         } catch (\Throwable $e) {
-            dd($e);
             return view('user.welcome')->with('error', $e);
         }
     }
@@ -70,13 +69,22 @@ class HomeController extends Controller
 
             $data = Cache::remember('surah-' . $id, now()->addMinutes(150), function () use ($id) {
                 $res = Http::get($this->urlAPI . '/surat/' . $id . '.json?print=pretty')->json();
-                $newData = collect($res)->map(function ($item) {
-                    if (Str::contains($item['ar'], 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ')) {
-                        $item['bismillah'] = 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ';
-                        $item['ar'] = str_replace('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', '', $item['ar']);
-                    } else {
+
+                $newData = collect($res)->map(function ($item) use ($id) {
+                    // Check if it's Surah Al-Fatihah (Surah 1)
+                    if ($id === 1 && $item['nomor'] === '1') {
+                        // Keep Bismillah as part of the first ayah for Surah Al-Fatihah
                         $item['bismillah'] = null;
+                    } else {
+                        // Separate Bismillah for other Surahs
+                        if (Str::contains($item['ar'], 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ')) {
+                            $item['bismillah'] = 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ';
+                            $item['ar'] = str_replace('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', '', $item['ar']);
+                        } else {
+                            $item['bismillah'] = null;
+                        }
                     }
+
                     return $item;
                 });
 
@@ -88,5 +96,6 @@ class HomeController extends Controller
             return view('user.surah.detail')->with('error', $e->getMessage());
         }
     }
+
 
 }
