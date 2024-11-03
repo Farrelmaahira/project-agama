@@ -24,7 +24,6 @@ class KajianController extends Controller
 
             return view('admin.kajian.kajian', ["data" => $data]);
         } catch (\Throwable $e) {
-            dd($e);
             return view('admin.kajian.kajian')->with('error', $e);
         }
     }

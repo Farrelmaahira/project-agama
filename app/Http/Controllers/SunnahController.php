@@ -14,17 +14,16 @@ class SunnahController extends Controller
     public function index(Request $request)
     {
         try {
-            $query = Sunnah::query(); 
+            $query = Sunnah::query();
 
             if($request->has('search')) {
-               $query->where('judul', 'like', '%' . $request->search . '%' )->orWhere('description', 'like', '%' . $request->search . '%'); 
+               $query->where('judul', 'like', '%' . $request->search . '%' )->orWhere('description', 'like', '%' . $request->search . '%');
             }
 
             $data = $query->paginate(10);
 
             return view('admin.sunnah.sunnah', compact('data'));
         } catch (\Throwable $th) {
-            dd($th);
             return redirect()->intended('/sunnah')->with('error', $th);
         }
     }
@@ -78,10 +77,7 @@ class SunnahController extends Controller
             if($data == null) {
                 return redirect()->intended('/admin/sunnah');
             }
-
-            dd($data);
         } catch(\Throwable $e) {
-            dd($e);
         }
     }
 
@@ -99,7 +95,7 @@ class SunnahController extends Controller
 
             return view('admin.sunnah.edit-sunnah', compact('data'));
         } catch(\Throwable $e) {
-            dd($e);
+            return redirect()->route('admin.sunnah')->with('error', $e);
         }
 
     }
