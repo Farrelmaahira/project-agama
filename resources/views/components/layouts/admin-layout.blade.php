@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Itik.Id</title>
-
+    <link rel="icon" href="/images/itik_icon.png" type="image/x-icon">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link
@@ -55,9 +55,13 @@
     <div class="flex h-screen">
         <!-- Sidebar -->
         <div class="md:w-1/6 h-screen md:block hidden shadow-gray-400 shadow-md relative">
-            <h1 class="text-2xl text-gray-800 text-center font-bold mt-6">
-                Itik.id
-            </h1>
+            <div class="flex gap-2 items-center justify-center mt-6">
+                <img src="/images/itik_icon.png" class="w-6 h-6 object-cover">
+                <h1 class="text-2xl text-gray-800 text-center font-bold">
+                    Itik.id
+                </h1>
+            </div>
+
             <div class="my-14"></div>
            <x-admin-nav-link :active="request()->routeIs('admin.kajian')" :link="route('admin.kajian')">
                <x-icon.college/>

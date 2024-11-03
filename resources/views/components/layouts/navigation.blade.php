@@ -11,9 +11,13 @@
                 </svg>
             </a>
         @endif
-        <a class="font-bold md:text-3xl text-2xl" href="{{route('surah')}}">
-             Itik.id
-        </a>
+        <div class="flex gap-2 justify-start items-center">
+            <img src="/images/itik_icon.png" class="w-6 h-6 object-cover">
+            <a class="font-bold md:text-3xl text-2xl" href="{{route('surah')}}">
+                Itik.id
+            </a>
+        </div>
+
     </div>
     <div class="flex gap-2" >
         <ul class="md:flex hidden md:text-[18px] gap-1 text-sm font-normal bg-tertiary px-2 py-3 rounded-full transition-all ease-in-out duration-300">
