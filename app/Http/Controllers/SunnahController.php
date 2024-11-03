@@ -24,7 +24,7 @@ class SunnahController extends Controller
 
             return view('admin.sunnah.sunnah', compact('data'));
         } catch (\Throwable $th) {
-            return redirect()->intended('/sunnah')->with('error', $th);
+            return back()->withErrors($th->getMessage());
         }
     }
 
@@ -42,6 +42,7 @@ class SunnahController extends Controller
     public function store(Request $request)
     {
         try {
+
             $request->validate([
                 'judul' => ['required'],
                 'description' => ['required'],
@@ -64,7 +65,7 @@ class SunnahController extends Controller
             }
 
         } catch (\Throwable $th) {
-
+            return back()->withErrors($th->getMessage());
         }
 
     }
@@ -78,6 +79,7 @@ class SunnahController extends Controller
                 return redirect()->intended('/admin/sunnah');
             }
         } catch(\Throwable $e) {
+            return back()->withErrors($e->getMessage());
         }
     }
 
@@ -95,7 +97,7 @@ class SunnahController extends Controller
 
             return view('admin.sunnah.edit-sunnah', compact('data'));
         } catch(\Throwable $e) {
-            return redirect()->route('admin.sunnah')->with('error', $e);
+            return back()->withErrors($e->getMessage());
         }
 
     }
@@ -132,7 +134,7 @@ class SunnahController extends Controller
 
             return redirect()->route('admin.sunnah');
         } catch (\Throwable $th) {
-            dd($th);
+            return back()->withErrors($th->getMessage());
         }
     }
 
@@ -154,7 +156,7 @@ class SunnahController extends Controller
             }
 
         } catch (\Throwable $th) {
-            dd($th);
+            return back()->withErrors($th->getMessage());
         }
     }
 }

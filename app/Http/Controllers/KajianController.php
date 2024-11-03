@@ -24,8 +24,7 @@ class KajianController extends Controller
 
             return view('admin.kajian.kajian', ["data" => $data]);
         } catch (\Throwable $e) {
-            dd($e);
-            return view('admin.kajian.kajian')->with('error', $e);
+            return back()->withErrors($e->getMessage());
         }
     }
 
@@ -68,7 +67,7 @@ class KajianController extends Controller
             return redirect()->route('admin.kajian');
 
         } catch (\Throwable $e) {
-            return redirect()->route('admin.kajian.add')->with('error', $e);
+            return back()->withErrors($e->getMessage());
         }
 
     }
@@ -83,7 +82,7 @@ class KajianController extends Controller
             $data = Kajian::find($id);
             return view('admin.kajian.detail-kajian', compact('data'));
         } catch (\Throwable $e) {
-            return redirect()->route('admin.kajian')->with('error', $e);
+            return back()->withErrors($e->getMessage());
         }
 
     }
@@ -97,7 +96,7 @@ class KajianController extends Controller
             $data = Kajian::find($id);
            return view('admin.kajian.update-kajian', compact('data'));
         } catch (\Throwable $e) {
-            return redirect()->intended(route('admin.kajian'));
+            return back()->withErrors($e->getMessage());
         }
     }
 
@@ -137,8 +136,7 @@ class KajianController extends Controller
             return redirect()->intended(route('admin.kajian'));
 
         } catch (\Throwable $e) {
-            dd($e);
-            return redirect()->route('admin.kajian.update', ['id'=>$id])->with('error', $e);
+            return back()->withErrors($e->getMessage());
         }
 
 
@@ -161,8 +159,7 @@ class KajianController extends Controller
             }
 
         } catch (\Throwable $e) {
-            dd($e);
-            return redirect()->route('admin.kajian')->with('error', $e);
+            return back()->withErrors($e->getMessage());
         }
     }
 }

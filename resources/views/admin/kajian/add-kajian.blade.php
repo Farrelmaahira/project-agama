@@ -18,7 +18,7 @@
             <div class="label">
                 <span class="label-text">Judul Kajian</span>
             </div>
-            <input type="text" placeholder="Type here" name="judul" class="input input-bordered w-full max-w-2xl" />
+            <input type="text" placeholder="Type here" name="judul" class="input input-bordered w-full max-w-2xl"/>
         </label>
         <label class="form-control w-full max-w-2xl md:col-span-1 col-span-2">
             <div class="label">
